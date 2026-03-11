@@ -32,5 +32,3 @@ This is the backend of the Furniture E-Commerce project, built with **Spring Boo
 - `POST /api/cart/add` - Add item to cart (needs `username` param).
 - `POST /api/orders` - Place an order.
 
-## ⚠️ Note for Beginners
-This project uses **simplified security**. Passwords are stored in plain text and "authentication" is handled by passing a `username` parameter. This is done so you can focus on learning **CRUD** and **Business Logic** first!
