@@ -36,7 +36,6 @@ public class AuthController {
         return ResponseEntity.ok(Map.of("message", "Logged out successfully"));
     }
 
-    // Simplified "me" endpoint that takes username as a param (Beginner style)
     @GetMapping("/me")
     public ResponseEntity<UserResponse> getCurrentUser(@RequestParam String username) {
         UserResponse response = authService.getCurrentUser(username);

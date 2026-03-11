@@ -49,7 +49,6 @@ public class OrderService {
             throw new BadRequestException("Cannot place order with empty cart");
         }
 
-        // Create order
         Order order = new Order();
         order.setUser(user);
         order.setShippingAddress(request.getShippingAddress());
@@ -76,7 +75,6 @@ public class OrderService {
 
             total = total.add(product.getPrice().multiply(BigDecimal.valueOf(cartItem.getQuantity())));
 
-            // Reduce stock
             product.setStockQuantity(product.getStockQuantity() - cartItem.getQuantity());
             productRepository.save(product);
         }
@@ -85,7 +83,6 @@ public class OrderService {
         order.setTotalAmount(total);
         Order savedOrder = orderRepository.save(order);
 
-        // Clear cart after order placed
         cartService.clearCart(username);
 
         return OrderResponse.from(savedOrder);
@@ -112,7 +109,6 @@ public class OrderService {
         return OrderResponse.from(order);
     }
 
-    // Admin: all orders
     public List<OrderResponse> getAllOrders() {
         return orderRepository.findAllByOrderByCreatedAtDesc()
                 .stream()

@@ -32,7 +32,7 @@ public class AuthService {
 
         User user = new User();
         user.setUsername(request.getUsername());
-        user.setPassword(request.getPassword()); // Store as plain text (Beginner style)
+        user.setPassword(request.getPassword());
         user.setEmail(request.getEmail());
         user.setFullName(request.getFullName());
         user.setPhone(request.getPhone());
@@ -40,7 +40,6 @@ public class AuthService {
         user.setRole(User.Role.USER);
         User savedUser = userRepository.save(user);
 
-        // Create cart for new user
         Cart cart = new Cart();
         cart.setUser(savedUser);
         cartRepository.save(cart);
@@ -52,12 +51,10 @@ public class AuthService {
         User user = userRepository.findByUsername(request.getUsername())
                 .orElseThrow(() -> new BadRequestException("Invalid username or password"));
 
-        // Plain text password check
         if (!user.getPassword().equals(request.getPassword())) {
             throw new BadRequestException("Invalid username or password");
         }
 
-        // Create cart if not exists
         if (cartRepository.findByUser(user).isEmpty()) {
             Cart cart = new Cart();
             cart.setUser(user);
@@ -68,7 +65,6 @@ public class AuthService {
     }
 
     public void logout() {
-        // No session management on backend for beginner project
     }
 
     public UserResponse getCurrentUser(String username) {

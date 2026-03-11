@@ -35,7 +35,6 @@ public class AdminController {
     @Autowired
     private OrderRepository orderRepository;
 
-    // Dashboard stats
     @GetMapping("/stats")
     public ResponseEntity<Map<String, Object>> getDashboardStats() {
         long totalUsers = userRepository.count();
@@ -47,7 +46,6 @@ public class AdminController {
                 "totalOrders", totalOrders));
     }
 
-    // Product management
     @GetMapping("/products")
     public ResponseEntity<List<Product>> getAllProducts() {
         return ResponseEntity.ok(productService.getAllProductsForAdmin());
@@ -70,7 +68,6 @@ public class AdminController {
         return ResponseEntity.ok(Map.of("message", "Product deactivated successfully"));
     }
 
-    // Order management
     @GetMapping("/orders")
     public ResponseEntity<List<OrderResponse>> getAllOrders() {
         return ResponseEntity.ok(orderService.getAllOrders());

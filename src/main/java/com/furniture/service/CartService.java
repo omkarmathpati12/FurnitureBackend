@@ -46,7 +46,6 @@ public class CartService {
             throw new BadRequestException("Product is no longer available");
         }
 
-        // Check if product already in cart
         CartItem cartItem = cartItemRepository.findByCartIdAndProductId(cart.getId(), productId)
                 .orElse(null);
 
